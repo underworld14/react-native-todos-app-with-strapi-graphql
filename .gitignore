@@ -1,0 +1,182 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+./ReactNative/node_modules
+./ReactNative/build/
+./ReactNative/*.pbxuser
+./ReactNative/!default.pbxuser
+./ReactNative/*.mode1v3
+./ReactNative/!default.mode1v3
+./ReactNative/*.mode2v3
+./ReactNative/!default.mode2v3
+./ReactNative/*.perspectivev3
+./ReactNative/!default.perspectivev3
+./ReactNative/xcuserdata
+./ReactNative/*.xccheckout
+./ReactNative/*.moved-aside
+./ReactNative/DerivedData
+./ReactNative/*.hmap
+./ReactNative/*.ipa
+./ReactNative/*.xcuserstate
+./ReactNative/ios/.xcode.env.local
+
+# Android/IntelliJ
+#
+./ReactNative/build/
+./ReactNative/.idea
+./ReactNative/.gradle
+./ReactNative/local.properties
+./ReactNative/*.iml
+./ReactNative/*.hprof
+./ReactNative/.cxx/
+
+# node.js
+#
+
+./ReactNative/npm-debug.log
+./ReactNative/yarn-error.log
+
+# BUCK
+./ReactNative/buck-out/
+./ReactNative/\.buckd/
+./ReactNative/*.keystore
+./ReactNative/!debug.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+./ReactNative/**/fastlane/report.xml
+./ReactNative/**/fastlane/Preview.html
+./ReactNative/**/fastlane/screenshots
+./ReactNative/**/fastlane/test_output
+
+# Bundle artifact
+./ReactNative/*.jsbundle
+
+# Ruby / CocoaPods
+./ReactNative/ios/Pods/
+./ReactNative/vendor/bundle/
+
+
+############################
+# OS X
+############################
+
+./TodosApi/.DS_Store
+./TodosApi/.AppleDouble
+./TodosApi/.LSOverride
+./TodosApi/Icon
+./TodosApi/.Spotlight-V100
+./TodosApi/.Trashes
+./TodosApi/._*
+
+
+############################
+# Linux
+############################
+
+./TodosApi/*~
+
+
+############################
+# Windows
+############################
+
+./TodosApi/Thumbs.db
+./TodosApi/ehthumbs.db
+./TodosApi/Desktop.ini
+./TodosApi/$RECYCLE.BIN/
+./TodosApi/*.cab
+./TodosApi/*.msi
+./TodosApi/*.msm
+./TodosApi/*.msp
+
+
+############################
+# Packages
+############################
+
+./TodosApi/*.7z
+./TodosApi/*.csv
+./TodosApi/*.dat
+./TodosApi/*.dmg
+./TodosApi/*.gz
+./TodosApi/*.iso
+./TodosApi/*.jar
+./TodosApi/*.rar
+./TodosApi/*.tar
+./TodosApi/*.zip
+./TodosApi/*.com
+./TodosApi/*.class
+./TodosApi/*.dll
+./TodosApi/*.exe
+./TodosApi/*.o
+./TodosApi/*.seed
+./TodosApi/*.so
+./TodosApi/*.swo
+./TodosApi/*.swp
+./TodosApi/*.swn
+./TodosApi/*.swm
+./TodosApi/*.out
+./TodosApi/*.pid
+
+
+############################
+# Logs and databases
+############################
+
+./TodosApi/.tmp
+./TodosApi/*.log
+./TodosApi/*.sql
+./TodosApi/*.sqlite
+./TodosApi/*.sqlite3
+
+
+############################
+# Misc.
+############################
+
+./TodosApi/*#
+./TodosApi/ssl
+./TodosApi/.idea
+./TodosApi/nbproject
+./TodosApi/public/uploads/*
+./TodosApi/!public/uploads/.gitkeep
+
+############################
+# Node.js
+############################
+./TodosApi/node_modules
+./TodosApi/lib-cov
+./TodosApi/lcov.info
+./TodosApi/pids
+./TodosApi/logs
+./TodosApi/results
+./TodosApi/.node_history
+
+############################
+# Tests
+############################
+
+./TodosApi/testApp
+./TodosApi/coverage
+
+############################
+# Strapi
+############################
+
+./TodosApi/.env
+./TodosApi/license.txt
+./TodosApi/exports
+./TodosApi/*.cache
+./TodosApi/dist
+./TodosApi/build
+./TodosApi/.strapi-updater.json
+
