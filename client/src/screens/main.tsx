@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import TodoListItem from '../components/todo-list-item';
 import {
   ScrollView,
@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import TodoInput from '../components/todo-input';
+import {useQuery} from '@apollo/client';
+import {GET_TODOS} from '../store/store';
+import {TodoItemsDataProps} from '@/components/todo-item';
 
 const initialData = [
   {
@@ -21,6 +24,16 @@ const initialData = [
     job: 'Doing React Native',
     done: false,
   },
+  {
+    id: 101,
+    job: 'Doing PPT Design',
+    done: true,
+  },
+  {
+    id: 102,
+    job: 'Doing Graphic Design',
+    done: false,
+  },
 ];
 
 interface Item {
@@ -30,7 +43,13 @@ interface Item {
 }
 
 export default function MainScreen() {
-  const [todos, setTodos] = useState(initialData);
+  const {data, loading, error} = useQuery(GET_TODOS);
+
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    setTodos(data?.todos?.data?.map(item => item?.attributes));
+  }, [data]);
 
   const handleDelete = useCallback((item: Item) => {
     console.info(item);
@@ -80,37 +99,7 @@ export default function MainScreen() {
           onToggleCheck={toggleCheck}
         />
       </ScrollView>
-      {/* <View
-        style={{
-          borderColor: '#fff',
-          backgroundColor: '#243B55',
-          borderWidth: 1,
-          marginHorizontal: 20,
-          borderRadius: 12,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingHorizontal: 10,
-          position: 'absolute',
-          bottom: 20,
-          color: '#E2EAF3',
-        }}>
-        <TextInput
-          style={{color: '#E2EAF3', fontSize: 18, height: 50, flex: 1}}
-                  placeholder="input todos"
-                  
-        />
-        <TouchableOpacity
-          style={{
-            height: 30,
-            width: 30,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Feather name="plus" color="#E2EAF3" size={18} />
-        </TouchableOpacity>
-      </View> */}
+
       <TodoInput />
     </View>
   );

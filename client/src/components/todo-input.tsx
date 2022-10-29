@@ -1,8 +1,11 @@
+import {CREATE_TODO} from '@/store/store';
+import {useMutation} from '@apollo/client';
 import React from 'react';
 import {View, TextInput, TouchableOpacity} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 export default function TodoInput() {
+  const [createTodo, {data}] = useMutation(CREATE_TODO);
   return (
     <View
       style={{

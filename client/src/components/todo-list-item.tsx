@@ -1,5 +1,5 @@
-import React, {useCallback} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import TodoItem, {TodoItemsDataProps} from './todo-item';
 
 interface TodoListItemsProps {
@@ -17,7 +17,7 @@ export default function TodoListItem({
     <View>
       {data.map((item, i) => (
         <TodoItem
-          key={item.id}
+          key={i}
           onRemove={onRemove}
           onToggleCheck={onToggleCheck}
           job={item.job}

@@ -11,12 +11,12 @@ const client = new ApolloClient({
 
 const App = () => {
   return (
-    // <ApolloProvider client={client}>
-    <NavigationContainer>
-      <StatusBar />
-      <Navigation />
-    </NavigationContainer>
-    // </ApolloProvider>
+    <ApolloProvider client={client}>
+      <NavigationContainer>
+        <StatusBar />
+        <Navigation />
+      </NavigationContainer>
+    </ApolloProvider>
   );
 };
 
