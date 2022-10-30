@@ -7,11 +7,11 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {gql} from '@apollo/client';
+import {gql, useMutation} from '@apollo/client';
 import Feather from 'react-native-vector-icons/Feather';
 import TodoInput from '../components/todo-input';
 import {useQuery} from '@apollo/client';
-import {GET_TODOS} from '../store/store';
+import {GET_TODOS} from '../queries/todos';
 
 const initialData = [
   {
@@ -36,55 +36,45 @@ const initialData = [
   },
 ];
 
-interface Item {
+interface TodoItem {
   id: number;
   job: string;
   done: boolean;
+  description?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
+const todosParser = todos => {
+  return todos.map(todo => ({id: todo.id, ...todo.attributes}));
+};
+
 export default function MainScreen() {
-  const {data, loading, error} = useQuery(gql`
-    query {
-      todos {
-        data {
-          attributes {
-            job
-            done
-            description
-          }
-        }
-      }
-    }
-  `);
+  const {data, loading, error} = useQuery(GET_TODOS);
+  const todos: TodoItem[] = data?.todos?.data
+    ? todosParser(data?.todos?.data)
+    : [];
 
-  console.info(error);
-  console.info(data?.todos?.data?.map(item => item?.attributes));
-  const [todos, setTodos] = useState([]);
+  // const handleDelete = useCallback((item: Item) => {
+  //   console.info(item);
+  //   setTodos(prevTodo => {
+  //     const newTodo = prevTodo.filter(td => td !== item);
+  //     return newTodo;
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    setTodos(data?.todos?.data?.map(item => item?.attributes));
-  }, []);
-
-  const handleDelete = useCallback((item: Item) => {
-    console.info(item);
-    setTodos(prevTodo => {
-      const newTodo = prevTodo.filter(td => td !== item);
-      return newTodo;
-    });
-  }, []);
-
-  const toggleCheck = useCallback((item: Item) => {
-    console.info(item);
-    setTodos(prevTodo => {
-      const newTodo = [...prevTodo];
-      const index = prevTodo.indexOf(item);
-      newTodo[index] = {
-        ...item,
-        done: !item.done,
-      };
-      return newTodo;
-    });
-  }, []);
+  // const toggleCheck = useCallback((item: Item) => {
+  //   console.info(item);
+  //   setTodos(prevTodo => {
+  //     const newTodo = [...prevTodo];
+  //     const index = prevTodo.indexOf(item);
+  //     newTodo[index] = {
+  //       ...item,
+  //       done: !item.done,
+  //     };
+  //     return newTodo;
+  //   });
+  // }, []);
 
   return (
     <View
@@ -108,9 +98,9 @@ export default function MainScreen() {
       </View>
       <ScrollView>
         <TodoListItem
-          data={data?.todos?.data?.map(item => item?.attributes)}
-          onRemove={handleDelete}
-          onToggleCheck={toggleCheck}
+          data={todos}
+          // onRemove={handleDelete}
+          // onToggleCheck={toggleCheck}
         />
       </ScrollView>
 

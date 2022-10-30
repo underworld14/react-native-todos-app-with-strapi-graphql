@@ -1,24 +1,30 @@
-import {CREATE_TODO} from '../store/store';
 import {useMutation} from '@apollo/client';
-import React from 'react';
+import React, {useState} from 'react';
 import {View, TextInput, TouchableOpacity} from 'react-native';
-import {gql} from '@apollo/client';
 import Feather from 'react-native-vector-icons/Feather';
+import {ADD_TODOS, GET_TODOS} from '../queries/todos';
 
 export default function TodoInput() {
-  const [createTodo, {data}] = useMutation(gql`
-    mutation {
-      createTodo(data: {job: $job, done: $boolean}) {
-        data {
-          id
-          attributes {
-            job
-            done
-          }
-        }
-      }
+  const [input, setInput] = useState('');
+  const [createTodo] = useMutation(ADD_TODOS, {
+    refetchQueries: [{query: GET_TODOS}],
+  });
+
+  const handleAddTodo = () => {
+    if (!input) {
+      return;
     }
-  `);
+    createTodo({
+      variables: {
+        data: {
+          job: input,
+          description: '',
+          done: false,
+        },
+      },
+    });
+  };
+
   return (
     <View
       style={{
@@ -36,8 +42,11 @@ export default function TodoInput() {
       }}>
       <TextInput
         style={{color: '#E2EAF3', fontSize: 18, height: 50, flex: 1}}
+        value={input}
+        onChangeText={setInput}
       />
       <TouchableOpacity
+        onPress={handleAddTodo}
         style={{
           height: 30,
           width: 30,

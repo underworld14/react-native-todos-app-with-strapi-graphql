@@ -3,8 +3,8 @@ import {View} from 'react-native';
 import TodoItem, {TodoItemsDataProps} from './todo-item';
 
 interface TodoListItemsProps {
-  onToggleCheck: () => void;
-  onRemove: () => void;
+  onToggleCheck?: () => void;
+  onRemove?: () => void;
   data: Array<TodoItemsDataProps>;
 }
 
