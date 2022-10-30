@@ -7,11 +7,11 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {gql} from '@apollo/client';
 import Feather from 'react-native-vector-icons/Feather';
 import TodoInput from '../components/todo-input';
 import {useQuery} from '@apollo/client';
 import {GET_TODOS} from '../store/store';
-import {TodoItemsDataProps} from '@/components/todo-item';
 
 const initialData = [
   {
@@ -43,13 +43,27 @@ interface Item {
 }
 
 export default function MainScreen() {
-  const {data, loading, error} = useQuery(GET_TODOS);
+  const {data, loading, error} = useQuery(gql`
+    query {
+      todos {
+        data {
+          attributes {
+            job
+            done
+            description
+          }
+        }
+      }
+    }
+  `);
 
+  console.info(error);
+  console.info(data?.todos?.data?.map(item => item?.attributes));
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     setTodos(data?.todos?.data?.map(item => item?.attributes));
-  }, [data]);
+  }, []);
 
   const handleDelete = useCallback((item: Item) => {
     console.info(item);
@@ -94,7 +108,7 @@ export default function MainScreen() {
       </View>
       <ScrollView>
         <TodoListItem
-          data={todos}
+          data={data?.todos?.data?.map(item => item?.attributes)}
           onRemove={handleDelete}
           onToggleCheck={toggleCheck}
         />

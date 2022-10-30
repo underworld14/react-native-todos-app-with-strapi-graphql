@@ -1,11 +1,24 @@
-import {CREATE_TODO} from '@/store/store';
+import {CREATE_TODO} from '../store/store';
 import {useMutation} from '@apollo/client';
 import React from 'react';
 import {View, TextInput, TouchableOpacity} from 'react-native';
+import {gql} from '@apollo/client';
 import Feather from 'react-native-vector-icons/Feather';
 
 export default function TodoInput() {
-  const [createTodo, {data}] = useMutation(CREATE_TODO);
+  const [createTodo, {data}] = useMutation(gql`
+    mutation {
+      createTodo(data: {job: $job, done: $boolean}) {
+        data {
+          id
+          attributes {
+            job
+            done
+          }
+        }
+      }
+    }
+  `);
   return (
     <View
       style={{
